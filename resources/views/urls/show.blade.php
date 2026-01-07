@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['dataTest' => 'url'])
 @section('content')
 <div class="container-lg mt-3">
     <h1>Сайты</h1>
@@ -17,7 +17,11 @@
                     <td>
                         {{ $url?->id }}
                     </td>
-                    <td>{{ $url?->name }}</td>
+                    <td>
+                        <a href="{{ route('urls.checks.index', $url?->id) }}" class="href">
+                            {{ $url?->name }}
+                        </a>
+                    </td>
                     <td>{{ now() }}</td>
                     <td>200</td>
                 </tr>
@@ -26,7 +30,8 @@
     </div>
 
     <div>
-        <a class="btn" href="{{ route('urls.index') }}"> <-- Назад к списку </a>
+        <a class="btn" href="{{ route('urls.index') }}">
+            <-- Назад к списку </a>
     </div>
 </div>
 @endsection

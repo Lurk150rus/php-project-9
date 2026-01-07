@@ -6,3 +6,5 @@ Route::get('/', [\App\Http\Controllers\UrlController::class, 'create'])->name('u
 Route::get('/urls', [\App\Http\Controllers\UrlController::class, 'index'])->name('urls.index');
 Route::post('/urls/store', [\App\Http\Controllers\UrlController::class, 'store'])->name('urls.store');
 Route::get('/urls/show/{url}', [\App\Http\Controllers\UrlController::class, 'show'])->name('urls.show');
+
+Route::get('urls/{url}/checks', [\App\Http\Controllers\UrlCheckController::class, 'index'])->name('urls.checks.index');
