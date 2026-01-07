@@ -3,7 +3,7 @@
 <div class="container-lg mt-3">
     <h1>Проверки сайта: </h1>
     <h3>{{ $url->name }}</h3>
-    <form method="POST" action="/url/check" class="d-flex justify-content-end mb-5">
+    <form method="POST" action="{{ route('urls.checks.store', $url) }}" class="d-flex justify-content-end mb-5">
         <input type="hidden" name="url" value="{{ $url->id }}">
         <a class="btn btn-success" type="submit">
             Проверить

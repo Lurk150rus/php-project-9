@@ -3,11 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUrlRequest;
+use App\Http\Services\UrlCheckService;
 use App\Models\Url;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class UrlController extends Controller
 {
+
+    private UrlCheckService $checkService;
+    public function __construct()
+    {
+        $this->checkService = new UrlCheckService();
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -33,7 +43,19 @@ class UrlController extends Controller
     {
         $urlData = $request['url'];
 
-        Url::create($urlData);
+        DB::beginTransaction();
+
+        try {
+            $url = Url::create($urlData);
+            $this->checkService->check($url);
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            Log::error($e->getMessage());
+        }
+
 
         return redirect()->route('urls.index');
     }
