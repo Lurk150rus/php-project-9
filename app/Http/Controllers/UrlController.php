@@ -13,7 +13,9 @@ class UrlController extends Controller
      */
     public function index()
     {
-        return view('urls.index');
+        $urls = Url::paginate(15);
+
+        return view('urls.index', compact(['urls']));
     }
 
     /**
@@ -41,7 +43,7 @@ class UrlController extends Controller
      */
     public function show(Url $url)
     {
-        //
+        return view('urls.show', compact(['url']));
     }
 
     /**

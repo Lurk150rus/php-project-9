@@ -13,26 +13,20 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($urls as $url)
                 <tr>
                     <td>
                         {{ $url?->id }}
                     </td>
-                    <td>
-                        <a href="{{ route('urls.show', $url) }}" class="href">
-                            {{ $url?->name }}
-                        </a>
-                    </td>
-
+                    <td>{{ $url?->name }}</td>
                     <td>{{ now() }}</td>
                     <td>200</td>
                 </tr>
-                @endforeach
             </tbody>
         </table>
     </div>
 
-    {{ $urls->links('pagination::bootstrap-5') }}
-
+    <div>
+        <a class="btn" href="{{ route('urls.index') }}"> <-- Назад к списку </a>
+    </div>
 </div>
 @endsection
