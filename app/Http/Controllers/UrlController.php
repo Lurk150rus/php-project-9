@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUrlRequest;
 use App\Models\Url;
 use Illuminate\Http\Request;
 
@@ -26,9 +27,13 @@ class UrlController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUrlRequest $request)
     {
-        //
+        $urlData = $request['url'];
+
+        Url::create($urlData);
+
+        return redirect()->route('urls.index');
     }
 
     /**
