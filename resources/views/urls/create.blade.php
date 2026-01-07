@@ -9,7 +9,12 @@
                 @csrf
                 <div class="col-8">
                     <label for="text" class="visually-hidden">Url для проверки</label>
-                    <input type="text" required name="url[name]" value="" class="form-control form-control-lg" placeholder="https://www.example.com">
+                    <input type="text" {{ old('url.name') }} required name="url[name]" value="" class="form-control form-control-lg" placeholder="https://www.example.com">
+
+                    @error('url.name')
+                    <div class="alert alert-danger"> Ошибки в поле URL </div>
+                    @enderror
+
                 </div>
                 <div class="col-2">
                     <input type="submit" class="btn btn-primary btn-lg ms-3 px-5 text-uppercase mx-3" value="Проверить">
