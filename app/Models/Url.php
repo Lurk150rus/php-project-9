@@ -8,7 +8,7 @@ class Url extends Model
 {
     protected $fillable = ['name'];
 
-    public function urlChecks()
+    public function checks()
     {
         return $this->hasMany(UrlCheck::class);
     }

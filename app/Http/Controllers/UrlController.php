@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUrlRequest;
 use App\Http\Services\UrlCheckService;
 use App\Models\Url;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\View\View;
 
 class UrlController extends Controller
 {
@@ -62,32 +64,17 @@ class UrlController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Url $url)
+    public function show(Url $url): View
     {
         return view('urls.show', compact(['url']));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Url $url)
+    public function check(Url $url): RedirectResponse
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Url $url)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Url $url)
-    {
-        //
+        $isSuccess = $this->checkService->check($url);
+        $messageData = $isSuccess
+            ? ['success', 'Страница успешно проверена!']
+            : ['warning', 'Произошла ошибка при проверке. Попробуйте позднее'];
+        return redirect()->route('urls.show', $url)->with($messageData[0], $messageData[1]);
     }
 }

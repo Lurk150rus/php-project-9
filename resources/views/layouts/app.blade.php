@@ -29,7 +29,20 @@
     </header>
 
     <main class="flex-grow-1">
+        @if(session('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+        @endif
+
+        @if(session('warning'))
+        <div class="alert alert-warning" role="alert">
+            {{ session('warning') }}
+        </div>
+        @endif
+
         @yield('content')
+
     </main>
 
     <footer class="border-top py-3 mt-5 flex-shrink-0">

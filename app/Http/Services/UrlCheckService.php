@@ -24,8 +24,8 @@ final class UrlCheckService
 
             $description = $crawler->filter('meta[name="description"]')->attr('content');
 
-            $url->urlChecks()->create(
-                ['status' => $request->status(), 'h1' => $h1, 'title' => $title, 'description' => $description]
+            $url->checks()->create(
+                ['status_code' => $request->status(), 'h1' => $h1, 'title' => $title, 'description' => $description, 'url_id' => $url->id]
             );
         } catch (\Exception $e) {
             Log::error($e->getMessage());

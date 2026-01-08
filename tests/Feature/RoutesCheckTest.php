@@ -57,7 +57,6 @@ final class RoutesCheckTest extends TestCase
     {
         return [
             'urls.show' => ['urls.show'],
-            'urls.checks.index' => ['urls.checks.index'],
         ];
     }
 

@@ -1,37 +1,57 @@
 @extends('layouts.app', ['dataTest' => 'url'])
 @section('content')
+
 <div class="container-lg mt-3">
-    <h1>Сайты</h1>
+    <h1>Сайт: {{ $url->name }}</h1>
     <div class="table-responsive">
-        <table class="table table-bordered table-hover text-nowrap" data-test="urls">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Имя</th>
-                    <th>Последняя проверка</th>
-                    <th>Код ответа</th>
-                </tr>
-            </thead>
+        <table class="table table-bordered table-hover text-nowrap" data-test="url">
             <tbody>
                 <tr>
-                    <td>
-                        {{ $url?->id }}
-                    </td>
-                    <td>
-                        <a href="{{ route('urls.checks.index', $url?->id) }}" class="href">
-                            {{ $url?->name }}
-                        </a>
-                    </td>
-                    <td>{{ now() }}</td>
-                    <td>200</td>
+                    <td>ID</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>Имя</td>
+                    <td>{{ $url->name }}</td>
+                </tr>
+                <tr>
+                    <td>Дата создания</td>
+                    <td>{{ $url->created_at }}</td>
                 </tr>
             </tbody>
         </table>
     </div>
-
-    <div>
-        <a class="btn" href="{{ route('urls.index') }}">
-            <-- Назад к списку </a>
-    </div>
+    <h2 class="mt-5 mb-3">Проверки</h2>
+    <form method="post" action="{{ route('urls.check', $url) }}">
+        @csrf
+        <input type="submit" class="btn btn-primary" value="Запустить проверку">
+    </form>
+    <table class="table table-bordered table-hover" data-test="checks">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Код ответа</th>
+                <th>h1</th>
+                <th>title</th>
+                <th>description</th>
+                <th>Дата создания</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($url->checks as $check)
+            <tr>
+                <td>{{ $check->id }}</td>
+                <td>{{ $check->status_code }}</td>
+                <td class="text-break">
+                    {{ $check->description }}
+                </td>
+                <td class="text-break">{{ $check->title }}</td>
+                <td class="text-break">{{ $check->description }}</td>
+                <td>{{ $check->created_at }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
+
 @endsection
