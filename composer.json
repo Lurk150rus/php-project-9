@@ -1,11 +1,13 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "hexlet/code",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "Simple seo frog.",
     "keywords": [
         "laravel",
-        "framework"
+        "framework",
+        "php",
+        "seo-frog"
     ],
     "license": "MIT",
     "require": {
