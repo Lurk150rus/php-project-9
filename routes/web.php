@@ -7,6 +7,5 @@ Route::get('/urls', [\App\Http\Controllers\UrlController::class, 'index'])->name
 Route::post('/urls/store', [\App\Http\Controllers\UrlController::class, 'store'])->name('urls.store');
 Route::get('/urls/show/{url}', [\App\Http\Controllers\UrlController::class, 'show'])->name('urls.show');
 
-Route::get('urls/{url}/checks', [\App\Http\Controllers\UrlCheckController::class, 'index'])->name('urls.checks.store');
-
+Route::get('urls/{url}/checks', [\App\Http\Controllers\UrlCheckController::class, 'index'])->name('urls.checks.index');
 Route::post('urls/checks/store/{url}', [\App\Http\Controllers\UrlCheckController::class, 'index'])->name('urls.checks.store');
