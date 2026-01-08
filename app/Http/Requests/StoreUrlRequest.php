@@ -22,7 +22,7 @@ class StoreUrlRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'url.name' => 'required|url|max:255|unique:urls,name',
+            'url.name' => 'required|url|max:255',
         ];
     }
 }

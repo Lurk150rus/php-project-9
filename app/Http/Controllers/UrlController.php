@@ -42,23 +42,36 @@ class UrlController extends Controller
      */
     public function store(StoreUrlRequest $request)
     {
+
         $urlData = $request['url'];
 
+        $url = Url::where('name', $urlData['name'])->first();
+
+        if ($url instanceof Url) {
+            return redirect()->route('urls.show', $url)->with('success', 'Страница уже существует');
+        }
+
         DB::beginTransaction();
+
+        $isSuccess = false;
 
         try {
             $url = Url::create($urlData);
             $this->checkService->check($url);
 
             DB::commit();
+            $isSuccess = true;
         } catch (\Exception $e) {
             DB::rollBack();
 
             Log::error($e->getMessage());
         }
 
+        $messageData = $isSuccess
+            ? ['success', 'Страница успешно проверена!']
+            : ['warning', 'Произошла ошибка при проверке. Попробуйте позднее'];
 
-        return redirect()->route('urls.index');
+        return redirect()->route('urls.index')->with($messageData[0], $messageData[1]);
     }
 
     /**

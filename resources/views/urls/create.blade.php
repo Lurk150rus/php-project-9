@@ -9,10 +9,11 @@
                 @csrf
                 <div class="col-8">
                     <label for="text" class="visually-hidden">Url для проверки</label>
-                    <input type="text" {{ old('url.name') }} required name="url[name]" value="" class="form-control form-control-lg" placeholder="https://www.example.com">
-
+                    <input type="text" name="url[name]" value="{{ old('url.name') }}" required class="form-control form-control-lg @error('url.name') is-invalid @enderror" placeholder="https://www.example.com">
                     @error('url.name')
-                    <div class="alert alert-danger"> Ошибки в поле URL </div>
+                    <div class="invalid-feedback">
+                        Некорректный URL
+                    </div>
                     @enderror
 
                 </div>
