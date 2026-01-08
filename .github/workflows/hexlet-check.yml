@@ -33,6 +33,12 @@ jobs:
         # Install project
         run: make install
       - name: Run linter
+
+      - name: Prepare environment
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
         # Run Linter
         run: make lint
 
