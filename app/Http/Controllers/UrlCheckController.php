@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Services\UrlCheckService;
 use App\Models\Url;
 
-
 class UrlCheckController extends Controller
 {
     private UrlCheckService $service;
-    public function __construct() {
+    public function __construct()
+    {
         $this->service = new UrlCheckService();
     }
 

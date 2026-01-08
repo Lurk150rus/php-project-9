@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Log;
 
 class UrlController extends Controller
 {
-
     private UrlCheckService $checkService;
     public function __construct()
     {

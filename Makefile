@@ -8,7 +8,7 @@ test:
 
 lint:
 	composer exec --verbose phpcs -- app app
-	composer exec --verbose phpstan
+	composer exec --verbose phpstan analyse app
 
 lint-fix:
 	composer exec --verbose phpcbf -- app app

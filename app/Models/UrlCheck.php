@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class UrlCheck extends Model
 {
-    public function url() {
+    public function url()
+    {
         return $this->belongsTo(Url::class);
     }
 }
